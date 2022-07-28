@@ -166,7 +166,7 @@ module.exports = (nodecg) => {
   });
 
   nodecg.listenFor("obs:new_scene_activated", (sceneName) => {
-    if (sceneName === "countdown_screen") {
+    if (sceneName === "countdown_screen" || sceneName === "game_change") {
       const nextStage = TRANSITION_STAGES.CONFIRM_RUNNERS_READY;
       transitionStateReplicant.value = {
         stage: nextStage,
