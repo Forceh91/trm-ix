@@ -1,25 +1,26 @@
 @import "../../shared/fonts/exo2/exo2.css";
 
 :root {
-	--marathon-col: #ffa301;
-	--marathon-alt-col: #fe5100;
+  --marathon-col: #ffa301;
+  --marathon-alt-col: #fe5100;
+  --omnibar-height: 65px;
 }
 
 * {
-	border: 0;
-	box-sizing: border-box;
-	margin: 0;
-	outline: 0;
-	padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  margin: 0;
+  outline: 0;
+  padding: 0;
 }
 
 body {
-	font-family: "Exo 2";
-	margin: 0;
-	opacity: 0;
+  font-family: "Exo 2";
+  margin: 0;
+  opacity: 0;
 }
 
 #container {
-	position: absolute;
-	overflow: hidden;
+  position: absolute;
+  overflow: hidden;
 }

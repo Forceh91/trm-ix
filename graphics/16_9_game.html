@@ -1,139 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>16x9 Game</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>16x9 Game</title>
 
-		<link rel="stylesheet" href="style/layout.css" />
-		<link rel="stylesheet" href="../shared/fonts/fontawesome/font-awesome.min.css" />
-		<link rel="stylesheet" href="../shared/fonts/exo2/exo2.css" />
-	</head>
+    <link rel="stylesheet" href="style/layout.css" />
+    <link rel="stylesheet" href="../shared/fonts/fontawesome/font-awesome.min.css" />
+    <link rel="stylesheet" href="../shared/fonts/exo2/exo2.css" />
+  </head>
 
-	<style>
-		#container {
-			background: black;
-			font-family: "Exo 2", sans-serif;
-			left: 0;
-			top: 0;
-			position: fixed;
-			width: 1920px;
-			height: 1080px;
-		}
-	</style>
+  <style>
+    #container {
+      background: black;
+      font-family: "Exo 2", sans-serif;
+      left: 0;
+      top: 0;
+      position: fixed;
+      width: 1920px;
+      height: 1080px;
+    }
+  </style>
 
-	<body>
-		<div id="container">
-			<layout-app></layout-app>
-		</div>
+  <body>
+    <div id="container">
+      <layout-app></layout-app>
+    </div>
 
-		<dom-module id="layout-app">
-			<template>
-				<style>
-					* {
-						box-sizing: border-box;
-					}
+    <dom-module id="layout-app">
+      <template>
+        <style>
+          * {
+            box-sizing: border-box;
+          }
 
-					#omnibar_container {
-						background: #333;
-						color: #ddd;
-						position: absolute;
-						bottom: 0;
-						width: 100%;
-						height: 50px;
-					}
+          #omnibar_container {
+            background: #333;
+            color: #ddd;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: var(--omnibar-height);
+          }
 
-					#left_bar {
-						background: #333;
-						border-right: 4px solid var(--marathon-col);
-						position: absolute;
-						left: 0;
-						top: 0;
-						bottom: 50px;
-						width: 450px;
-						display: flex;
-						flex-direction: column;
-					}
+          #left_bar {
+            background: #333;
+            border-right: 4px solid var(--marathon-col);
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: var(--omnibar-height);
+            width: 450px;
+            display: flex;
+            flex-direction: column;
+          }
 
-					#left_bar:before {
-						content: " ";
-						background-image: url("./img/SJPlayLiveBG.png");
-						background-size: cover;
-						opacity: 0.2;
-						width: 100%;
-						height: 100%;
-						position: absolute;
-					}
+          #left_bar:before {
+            content: " ";
+            background-image: url("./img/SJPlayLiveBG.png");
+            background-size: cover;
+            opacity: 0.2;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+          }
 
-					#run_container {
-						width: 100%;
-						height: 100%;
-						padding: 15px;
-						color: #ddd;
-					}
+          #run_container {
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            color: #ddd;
+          }
 
-					#incentives_container {
-						align-self: flex-end;
-						background: #333;
-						color: #ddd;
-						display: flex;
-						width: 100%;
-					}
+          #incentives_container {
+            align-self: flex-end;
+            background: #333;
+            color: #ddd;
+            display: flex;
+            width: 100%;
+          }
 
-					#donations_container {
-						align-self: flex-end;
-						background: #333;
-						color: #ddd;
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						width: 100%;
-					}
-				</style>
+          #donations_container {
+            align-self: flex-end;
+            background: #333;
+            color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+          }
+        </style>
 
-				<div id="left_bar">
-					<div id="run_container">
-						<trm-run-info />
-					</div>
+        <div id="left_bar">
+          <div id="run_container">
+            <trm-run-info />
+          </div>
 
-					<div id="incentives_container">
-						<trm-donation-incentives />
-					</div>
+          <div id="incentives_container">
+            <trm-donation-incentives />
+          </div>
 
-					<div id="donations_container">
-						<trm-donation-notifier />
-					</div>
-				</div>
-				<div id="omnibar_container">
-					<trm-omnibar />
-				</div>
-			</template>
+          <div id="donations_container">
+            <trm-donation-notifier />
+          </div>
+        </div>
+        <div id="omnibar_container">
+          <trm-omnibar />
+        </div>
+      </template>
 
-			<script type="module">
-				import { PolymerElement } from "../node_modules/@polymer/polymer/polymer-element.js";
+      <script type="module">
+        import { PolymerElement } from "../node_modules/@polymer/polymer/polymer-element.js";
 
-				class Game4x3 extends PolymerElement {
-					static get is() {
-						return "layout-app";
-					}
-				}
+        class Game4x3 extends PolymerElement {
+          static get is() {
+            return "layout-app";
+          }
+        }
 
-				customElements.define(Game4x3.is, Game4x3);
-			</script>
-		</dom-module>
+        customElements.define(Game4x3.is, Game4x3);
+      </script>
+    </dom-module>
 
-		<script type="module">
-			import "../shared/imports/required.js";
-			import "./elements/parents/trm-omnibar/trm-omnibar.js";
-			import "./elements/parents/trm-donation-notifier/trm-donation-notifier.js";
-			import "./elements/parents/trm-donation-incentives/trm-donation-incentives.js";
-			import "./elements/parents/trm-run-info/trm-run-info.js";
+    <script type="module">
+      import "../shared/imports/required.js";
+      import "./elements/parents/trm-omnibar/trm-omnibar.js";
+      import "./elements/parents/trm-donation-notifier/trm-donation-notifier.js";
+      import "./elements/parents/trm-donation-incentives/trm-donation-incentives.js";
+      import "./elements/parents/trm-run-info/trm-run-info.js";
 
-			window.addEventListener("DOMContentLoaded", () => {
-				TweenLite.to(document.body, 0.333, {
-					opacity: 1,
-					ease: Power1.easeOut,
-				});
-			});
-		</script>
-	</body>
+      window.addEventListener("DOMContentLoaded", () => {
+        TweenLite.to(document.body, 0.333, {
+          opacity: 1,
+          ease: Power1.easeOut,
+        });
+      });
+    </script>
+  </body>
 </html>
