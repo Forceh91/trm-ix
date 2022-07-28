@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Now Playing</title>
+	</head>
+	<body>
+		<dom-module id="dashboard-now-playing">
+			<template>
+				<style is="custom-style">
+					* {
+						box-sizing: border-box;
+					}
+
+					#body {
+						font-weight: normal;
+						text-align: center;
+						width: 100%;
+					}
+				</style>
+
+				<h3 id="body"><span id="artist"></span>&nbsp;-&nbsp;<span id="track"></span><span id="album_container">&nbsp;(<span id="album"></span>)</span></h3>
+			</template>
+		</dom-module>
+
+		<script type="module">
+			import "./now-playing.js";
+		</script>
+
+		<dashboard-now-playing />
+	</body>
+</html>

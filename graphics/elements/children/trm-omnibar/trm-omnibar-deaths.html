@@ -1,0 +1,40 @@
+<dom-module id="trm-omnibar-death-count">
+  <template>
+    <style>
+      :host {
+        display: flex;
+        width: auto;
+      }
+
+      #deathCountContainer {
+        align-items: center;
+        background: var(--marathon-col);
+        color: #fff;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 30px;
+        font-weight: bold;
+        justify-content: center;
+        padding: 0 10px;
+      }
+
+      #deaths {
+        font-size: 20px;
+      }
+
+      #deathCountContainer span {
+        font-size: 15px;
+        font-weight: initial;
+        text-transform: uppercase;
+      }
+    </style>
+
+    <div id="deathCountContainer">
+      <div id="deaths"></div>
+      <span>Deaths</span>
+    </div>
+  </template>
+
+  <script src="trm-omnibar-deaths.js"></script>
+</dom-module>
+<script src="./trm-omnibar-deaths.js"></script>

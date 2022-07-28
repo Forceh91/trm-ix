@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Countdown Control</title>
+
+		<link rel="stylesheet" href="../style/base.css" />
+		<script type="module" src="../../node_modules/@polymer/iron-flex-layout/iron-flex-layout-classes.js"></script>
+		<script type="module" src="../../node_modules/@polymer/paper-button/paper-button.js"></script>
+	</head>
+	<body>
+		<dom-module id="dashboard-countdown-control">
+			<template>
+				<style is="custom-style" include="iron-flex iron-flex-alignment">
+					* {
+						box-sizing: border-box;
+					}
+
+					.showing {
+						color: var(--dashboard-success-col);
+					}
+
+					.faded {
+						color: var(--dashboard-danger-col);
+					}
+
+					#isShowing {
+						text-transform: uppercase;
+						text-align: center;
+					}
+
+					#controls {
+						display: flex;
+					}
+
+					paper-button {
+						width: 100%;
+					}
+
+					#hideStationIdent {
+						display: none;
+					}
+
+					paper-button.success:not([disabled]) {
+						background: var(--dashboard-success-col);
+						color: #fff;
+					}
+
+					paper-button.danger:not([disabled]) {
+						background: var(--dashboard-danger-col);
+						color: #fff;
+					}
+				</style>
+
+				<h2 id="isShowing" class="showing">Showing</h2>
+				<div id="controls" class="layout horizontal">
+					<paper-button id="showCountdownOverlay" class="success" raised disabled>Show</paper-button>
+					<paper-button id="hideCountdownOverlay" class="danger" raised>Hide</paper-button>
+				</div>
+			</template>
+
+			<script src="countdown-control.js"></script>
+		</dom-module>
+
+		<dashboard-countdown-control></dashboard-countdown-control>
+	</body>
+</html>
+<script src="./countdown-control.js"></script>

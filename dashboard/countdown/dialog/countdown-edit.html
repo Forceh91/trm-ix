@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Countdown Edit</title>
+
+		<link rel="stylesheet" href="../../style/base.css" />
+		<link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+	</head>
+	<body>
+		<style is="custom-style">
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				background: transparent;
+			}
+
+			#timer {
+				font-weight: normal;
+				text-align: center;
+				width: 100%;
+			}
+
+			.controls {
+				display: flex;
+			}
+
+			.controls:not(:last-child) {
+				margin-bottom: 15px;
+			}
+
+			button {
+				width: 100%;
+			}
+
+			button:not(:last-child) {
+				margin-right: 15px;
+			}
+		</style>
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend"><span class="input-group-text">Hours</span></div>
+			<input type="number" id="input_h" class="form-control" value="0" />
+		</div>
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend"><span class="input-group-text">Minutes</span></div>
+			<input type="number" id="input_m" class="form-control" value="0" />
+		</div>
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend"><span class="input-group-text">Seconds</span></div>
+			<input type="number" id="input_s" class="form-control" value="0" />
+		</div>
+
+		<script>
+			const hours = document.getElementById("input_h");
+			const minutes = document.getElementById("input_m");
+			const seconds = document.getElementById("input_s");
+			document.addEventListener("dialog-confirmed", () => {
+				var h = parseInt(hours.value) * 3600;
+				var m = parseInt(minutes.value) * 60;
+				var s = parseInt(seconds.value);
+
+				var totalSeconds = (h || 0) + (m || 0) + (s || 0);
+
+				hours.value = 0;
+				minutes.value = 0;
+				seconds.value = 0;
+
+				nodecg.sendMessage("countdowntimer:settime", totalSeconds * 1000);
+			});
+		</script>
+	</body>
+</html>

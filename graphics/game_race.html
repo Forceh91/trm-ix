@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Game Race</title>
+
+		<link rel="stylesheet" href="style/layout.css" />
+		<link rel="stylesheet" href="../shared/fonts/fontawesome/font-awesome.min.css" />
+		<link rel="stylesheet" href="../shared/fonts/exo2/exo2.css" />
+	</head>
+
+	<style>
+		#container {
+			background: transparent;
+			font-family: "Exo 2", sans-serif;
+			left: 0;
+			top: 0;
+			position: fixed;
+			width: 1920px;
+			height: 1080px;
+		}
+	</style>
+
+	<body>
+		<div id="container">
+			<layout-app></layout-app>
+		</div>
+
+		<dom-module id="layout-app">
+			<template>
+				<style>
+					* {
+						box-sizing: border-box;
+					}
+
+					#omnibar_container {
+						background: #333;
+						color: #ddd;
+						position: absolute;
+						bottom: 0;
+						width: 100%;
+						height: 50px;
+					}
+
+					#bottom_bar {
+						background: #333;
+						border-top: 4px solid var(--marathon-col);
+						bottom: 50px;
+						display: flex;
+						height: 310px;
+						left: 0;
+						flex-direction: row;
+						position: absolute;
+						width: 100%;
+					}
+
+					#bottom_bar:before {
+						content: " ";
+						background-image: url("./img/SJPlayLiveBG.png");
+						background-size: cover;
+						opacity: 0.2;
+						width: 100%;
+						height: 100%;
+						position: absolute;
+					}
+
+					#run_container {
+						color: #ddd;
+						border-left: 4px solid var(--marathon-col);
+						height: 100%;
+						padding: 15px;
+						width: 100%;
+					}
+
+					#incentives_container {
+						align-self: flex-end;
+						background: #333;
+						color: #ddd;
+						display: flex;
+						height: 100%;
+						width: 100%;
+					}
+
+					#donations_container {
+						align-items: center;
+						background: #333;
+						border-left: 4px solid var(--marathon-col);
+						color: #ddd;
+						display: flex;
+						justify-content: center;
+						width: 100%;
+					}
+
+					#donations_container trm-donation-notifier {
+						height: 100%;
+					}
+
+					#split_bar {
+						border-right: 4px solid var(--marathon-col);
+						left: calc(50% - 4px);
+						height: 720px;
+						position: absolute;
+						top: 0;
+					}
+
+					#timer {
+						bottom: 360px;
+						position: absolute;
+					}
+
+					#timer.left {
+						left: 0;
+					}
+
+					#timer.right {
+						left: 50%;
+					}
+				</style>
+
+				<div id="bottom_bar">
+					<div id="incentives_container">
+						<trm-donation-incentives horizontal="true" />
+					</div>
+
+					<div id="run_container">
+						<trm-run-info horizontal="true" />
+					</div>
+
+					<div id="donations_container">
+						<trm-donation-notifier />
+					</div>
+				</div>
+				<div id="omnibar_container">
+					<trm-omnibar />
+				</div>
+
+				<div id="split_bar"></div>
+				<trm-runner-nameplate id="timer" class="left" runnerid="0"></trm-runner-nameplate>
+				<trm-runner-nameplate id="timer" class="right" runnerid="1"></trm-runner-nameplate>
+			</template>
+
+			<script type="module">
+				import { PolymerElement } from "../node_modules/@polymer/polymer/polymer-element.js";
+
+				class GameRace extends PolymerElement {
+					static get is() {
+						return "layout-app";
+					}
+				}
+
+				customElements.define(GameRace.is, GameRace);
+			</script>
+		</dom-module>
+
+		<script type="module">
+			import "../shared/imports/required.js";
+			import "./elements/parents/trm-omnibar/trm-omnibar.js";
+			import "./elements/parents/trm-donation-notifier/trm-donation-notifier.js";
+			import "./elements/parents/trm-donation-incentives/trm-donation-incentives.js";
+			import "./elements/parents/trm-run-info/trm-run-info.js";
+			import "./elements/parents/trm-runner-nameplate/trm-runner-nameplate.js";
+
+			window.addEventListener("DOMContentLoaded", () => {
+				TweenLite.to(document.body, 0.333, {
+					opacity: 1,
+					ease: Power1.easeOut,
+				});
+			});
+		</script>
+	</body>
+</html>

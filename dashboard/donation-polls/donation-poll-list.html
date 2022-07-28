@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Donation Polls</title>
+
+		<link rel="stylesheet" href="../style/base.css" />
+	</head>
+	<body>
+		<dom-module id="dashboard-donation-poll-list">
+			<template>
+				<style>
+					#donationPollList {
+						display: block;
+						width: 100%;
+					}
+
+					#noData {
+						color: #888;
+						font-weight: bold;
+						padding: 15px;
+						text-align: center;
+						text-transform: uppercase;
+						width: 100%;
+					}
+
+					#donationPollList dashboard-donation-poll-list-item {
+						display: block;
+					}
+
+					#donationPollList dashboard-donation-poll-list-item:not(:last-child) {
+						border-bottom: 1px solid #aaa;
+						margin-bottom: 20px;
+						padding-bottom: 20px;
+					}
+				</style>
+
+				<div id="noData">
+					There are currently no donation polls, these can be added via Tiltify
+				</div>
+				<div id="donationPollList"></div>
+			</template>
+		</dom-module>
+
+		<script type="module">
+			import "./donation-poll-list.js";
+			import "./donation-poll-list-item.js";
+		</script>
+
+		<dashboard-donation-poll-list></dashboard-donation-poll-list>
+	</body>
+</html>

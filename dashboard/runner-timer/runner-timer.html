@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Runner Timer</title>
+
+		<link rel="stylesheet" href="../style/base.css" />
+	</head>
+	<body>
+		<dom-module id="dashboard-runner-timer">
+			<template>
+				<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+				<style>
+					:host {
+						align-items: center;
+						display: flex;
+						flex-direction: column;
+						flex-wrap: wrap;
+						justify-content: center;
+					}
+
+					#runnerTimer {
+						font-size: 2rem;
+						margin-bottom: 20px;
+					}
+
+					#runnerTimerList {
+						font-size: 1.1rem;
+						margin-bottom: 20px;
+						width: 100%;
+					}
+
+					#runnerTimerList dashboard-runner-timer-item {
+						display: block;
+					}
+
+					#runnerTimerList dashboard-runner-timer-item:not(:first-child) {
+						margin-top: 20px;
+					}
+
+					.buttonContainer {
+						clear: both;
+						display: flex;
+						width: 100%;
+					}
+
+					.buttonContainer button {
+						margin-left: 0;
+						width: 100%;
+					}
+
+					.buttonContainer:not(:last-child) {
+						margin-bottom: 10px;
+					}
+
+					.btn:not(:last-child) {
+						margin-right: 15px;
+					}
+				</style>
+
+				<div id="runnerTimer"></div>
+
+				<div id="runnerTimerList">
+					<dom-repeat id="runnerTimers" items="[[timers]]" as="timer" filter="_onlyTimersWithRunner">
+						<template>
+							<dashboard-runner-timer-item ix="[[index]]" timer="[[timer]]"></dashboard-runner-timer-item>
+						</template>
+					</dom-repeat>
+				</div>
+
+				<div class="buttonContainer">
+					<button type="button" class="btn btn-sm btn-success" id="startTimer" class="start">Start All</button>
+					<button type="button" class="btn btn-sm btn-warning" id="pauseTimer" class="pause">Pause All</button>
+				</div>
+
+				<div class="buttonContainer">
+					<button type="button" class="btn btn-sm btn-danger" id="resetTimer" class="reset">Reset All</button>
+				</div>
+			</template>
+		</dom-module>
+
+		<script type="module">
+			import "./runner-timer.js";
+			import "./runner-timer-item.js";
+			import "../../node_modules/@polymer/polymer/lib/elements/dom-repeat.js";
+		</script>
+
+		<dashboard-runner-timer></dashboard-runner-timer>
+	</body>
+</html>

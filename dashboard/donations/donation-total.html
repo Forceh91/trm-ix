@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donation Total</title>
+</head>
+<body>
+    <dom-module id="dashboard-donation-total">       
+        <template>
+            <style is="custom-style">
+                * {
+                    box-sizing: border-box;
+                }
+
+                #body {
+                    font-weight: normal;
+                    text-align: center;
+                    width: 100%;
+                }
+            </style>
+
+            <h1 id="body">$<span id="total"></h1>
+        </template>
+    </dom-module>
+
+    <script type="module">
+        import "./donation-total.js";
+    </script>
+
+    <dashboard-donation-total></dashboard-donation-total>
+</body>
+</html>

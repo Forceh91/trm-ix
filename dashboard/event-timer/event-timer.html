@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Event Timer</title>
+
+		<link rel="stylesheet" href="../style/base.css" />
+	</head>
+	<body>
+		<dom-module id="dashboard-event-timer">
+			<template>
+				<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+				<style>
+					:host {
+						align-items: center;
+						display: flex;
+						flex-direction: column;
+						flex-wrap: wrap;
+						justify-content: center;
+					}
+
+					#timer {
+						font-size: 2rem;
+						margin-bottom: 20px;
+					}
+
+					.buttonContainer {
+						clear: both;
+						display: flex;
+						justify-content: center;
+						width: 100%;
+					}
+
+					.buttonContainer button {
+						width: 100%;
+					}
+
+					.buttonContainer button:not(:first-child) {
+						margin-left: 15px;
+					}
+
+					.buttonContainer:not(:last-child) {
+						margin-bottom: 10px;
+					}
+				</style>
+
+				<div id="timer">00:00</div>
+
+				<div class="buttonContainer">
+					<button type="button" id="startTimer" class="btn btn-success">Start</button>
+					<button type="button" id="pauseTimer" class="btn btn-danger">Pause</button>
+				</div>
+
+				<div class="buttonContainer">
+					<button type="button" id="resetTimer" class="btn btn-warning">Reset</button>
+				</div>
+			</template>
+		</dom-module>
+
+		<script type="module">
+			import "./event-timer.js";
+		</script>
+
+		<dashboard-event-timer></dashboard-event-timer>
+	</body>
+</html>

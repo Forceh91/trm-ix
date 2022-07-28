@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Marathon Total Screen</title>
+
+    <link rel="stylesheet" href="style/layout.css" />
+    <link rel="stylesheet" href="../shared/fonts/fontawesome/font-awesome.min.css" />
+    <link rel="stylesheet" href="../shared/fonts/exo2/exo2.css" />
+  </head>
+
+  <style>
+    #container {
+      font-family: "Exo 2", sans-serif;
+      left: 0;
+      top: 0;
+      position: fixed;
+      width: 1920px;
+      height: 1080px;
+    }
+  </style>
+
+  <body>
+    <dom-module id="layout-app">
+      <template>
+        <style>
+          * {
+            box-sizing: border-box;
+          }
+
+          :host,
+          #background_vid {
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+          }
+
+          #overlay_container {
+            background: rgba(0, 0, 0, 0.6);
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 3;
+          }
+
+          #background_vid {
+            object-fit: cover;
+            z-index: 0;
+          }
+
+          #omnibar_container {
+            background: #333;
+            color: #ddd;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+          }
+
+          h1 {
+            font-size: 1.3rem;
+            margin: 0;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+          }
+
+          .main-title {
+            color: var(--marathon-col);
+            font-size: 1.5rem;
+            text-align: center;
+            text-transform: uppercase;
+            width: 100%;
+            word-wrap: break-word;
+          }
+
+          #marathon_total {
+            background: #11111188;
+            border: 1px solid var(--marathon-col);
+            display: flex;
+            flex-wrap: wrap;
+            padding: 15px;
+            width: 500px;
+          }
+
+          #donation_notifier {
+            border: 1px solid var(--marathon-col);
+            width: 500px;
+          }
+
+          #now_playing {
+            border: 1px solid var(--marathon-col);
+            width: 500px;
+          }
+
+          #donation_notifier trm-donation-notifier,
+          #now_playing trm-now-playing {
+            background: #11111188;
+          }
+
+          #now_playing trm-now-playing {
+            display: flex;
+            padding: 15px;
+            width: 100%;
+          }
+
+          #body {
+            align-items: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            height: calc(100% - 50px);
+            justify-content: center;
+            width: 100%;
+          }
+        </style>
+
+        <video id="background_vid" autoplay loop muted playinline src="./img/trm-loop-bg-0.mp4"></video>
+
+        <div id="overlay_container">
+          <div id="omnibar_container">
+            <trm-omnibar data-hide-timer="true" data-hide-deaths="true" hidetotal></trm-omnibar>
+          </div>
+
+          <div id="body">
+            <div id="marathon_total">
+              <h1 class="main-title">Total Raised</h1>
+              <trm-marathon-total></trm-marathon-total>
+            </div>
+
+            <div id="donation_notifier">
+              <trm-donation-notifier></trm-donation-notifier>
+            </div>
+
+            <div id="now_playing">
+              <trm-now-playing has-background></trm-now-playing>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <script type="module">
+        import { PolymerElement } from "../node_modules/@polymer/polymer/polymer-element.js";
+
+        class MarathonTotalScreen extends PolymerElement {
+          static get is() {
+            return "layout-app";
+          }
+
+          getRandomIntInclusive(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max) || min;
+            return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+          }
+
+          generateBackground() {
+            const rand = this.getRandomIntInclusive(1, 80);
+            this.setBackground(rand);
+          }
+
+          setBackground(rand) {
+            const el = this.$.background_vid;
+            if (el) el.src = `./img/trm-bg-${rand}.mp4`;
+          }
+
+          ready() {
+            super.ready();
+            this.generateBackground();
+            setInterval(this.generateBackground.bind(this), 60 * 1000);
+          }
+        }
+
+        customElements.define(MarathonTotalScreen.is, MarathonTotalScreen);
+      </script>
+    </dom-module>
+
+    <script type="module">
+      import "../shared/imports/required.js";
+      import "./elements/parents/trm-omnibar/trm-omnibar.js";
+      import "./elements/parents/trm-donation-notifier/trm-donation-notifier.js";
+      import "./elements/parents/trm-marathon-total/trm-marathon-total.js";
+      import "./elements/parents/trm-now-playing/trm-now-playing.js";
+
+      window.addEventListener("DOMContentLoaded", () => {
+        TweenLite.to(document.body, 0.333, {
+          opacity: 1,
+          ease: Power1.easeOut,
+        });
+      });
+    </script>
+
+    <div id="container">
+      <layout-app></layout-app>
+    </div>
+  </body>
+</html>

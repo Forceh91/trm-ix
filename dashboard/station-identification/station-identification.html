@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Station Identification</title>
+    <script src="./station-identification.js"></script>
+
+    <script type="module" src="../../node_modules/@polymer/iron-flex-layout/iron-flex-layout-classes.js"></script>
+    <script type="module" src="../../node_modules/@polymer/paper-button/paper-button.js"></script>
+
+    <style is="custom-style" include="iron-flex iron-flex-alignment">
+        * {
+    <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<style is="custom-style" include="iron-flex iron-flex-alignment">
+        * {
+            box-sizing: border-box;
+        }
+
+        .hidden {
+            color: green;
+        }
+
+        .active {
+            color: red;
+        }
+
+        #isActive {
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        #controls {
+            display: flex;
+        }
+
+        paper-button {
+            width: 100%;
+        }
+
+        #hideStationIdent {
+            display: none;
+        }
+
+        paper-button.success:not([disabled]) {
+            background: green;
+            color: #FFF;
+        }
+    </style>`;
+
+document.head.appendChild($_documentContainer.content);
+</script><script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div id="controls" class="layout horizontal">
+        <paper-button id="showStationIdent" class="success" raised="">Show</paper-button>
+        <paper-button id="hideStationIdent" class="danger" disabled="">Hide</paper-button>
+    </div>`;
+
+document.body.appendChild($_documentContainer.content);
+</script><script type="module">
+const $_documentContainer = document.createElement('template');
+$_documentContainer.innerHTML = `<h2 id="isActive" class="hidden">Hidden</h2>`;
+document.body.appendChild($_documentContainer.content);
+</script>

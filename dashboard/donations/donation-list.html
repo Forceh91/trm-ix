@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Donations</title>
+
+		<link rel="stylesheet" href="../style/base.css" />
+
+		<style>
+			body {
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<dom-module id="dashboard-donation-list">
+			<template>
+				<style>
+					#donationlist {
+						display: block;
+						width: 100%;
+					}
+
+					.donation-list-no-items {
+						color: #888;
+						font-weight: bold;
+						padding: 15px;
+						text-align: center;
+						text-transform: uppercase;
+						width: 100%;
+					}
+
+					#donationlist dashboard-donation-list-item {
+						display: block;
+					}
+
+					#donationlist dashboard-donation-list-item:not(:last-child) {
+						border-bottom: 1px solid #aaa;
+					}
+				</style>
+
+				<div id="noDonations" class="donation-list-no-items">
+					There are currently no donations
+				</div>
+				<div id="donationlist"></div>
+			</template>
+		</dom-module>
+
+		<script type="module">
+			import "./donation-list.js";
+			import "./donation-list-item.js";
+		</script>
+
+		<dashboard-donation-list></dashboard-donation-list>
+	</body>
+</html>

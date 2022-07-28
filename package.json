@@ -1,0 +1,269 @@
+{
+  "description": "The on-screen graphics used during Tomb Raider Marathon IX",
+  "name": "trm-ix",
+  "version": "9.0.0",
+  "contributors": [
+    "Matt Hadden <info@tombraidermarathon.com>"
+  ],
+  "dependencies": {
+    "@polymer/iron-icons": "^3.0.0",
+    "@polymer/iron-image": "^3.0.0",
+    "@polymer/iron-list": "^3.0.0",
+    "@polymer/iron-pages": "^3.0.0",
+    "@polymer/iron-validator-behavior": "^3.0.0",
+    "@polymer/paper-button": "^3.0.0",
+    "@polymer/paper-checkbox": "^3.0.0",
+    "@polymer/paper-dialog": "^3.0.0",
+    "@polymer/paper-dialog-scrollable": "^3.0.0",
+    "@polymer/paper-dropdown-menu": "^3.0.0",
+    "@polymer/paper-icon-button": "^3.0.0",
+    "@polymer/paper-input": "^3.0.0",
+    "@polymer/paper-item": "^3.0.0",
+    "@polymer/paper-listbox": "^3.0.0",
+    "@polymer/paper-progress": "^3.0.0",
+    "@polymer/paper-spinner": "^3.0.0",
+    "@polymer/paper-styles": "^3.0.0",
+    "@polymer/paper-toast": "^3.0.0",
+    "@polymer/paper-toggle-button": "^3.0.0",
+    "@polymer/paper-tooltip": "^3.0.0",
+    "@polymer/polymer": "^3.3.1",
+    "bootstrap": "^4.4.1",
+    "compare-versions": "^3.6.0",
+    "moment": "^2.24.0",
+    "node-twitch": "^0.4.5",
+    "obs-websocket-js": "^4.0.2",
+    "passport-twitch-new": "^0.0.2",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "socket.io": "^2.2.0",
+    "web-animations-js": "^2.3.1"
+  },
+  "devDependencies": {
+    "@0xcda7a/empathy": "^0.0.9",
+    "web-request": "^1.0.7"
+  },
+  "nodecg": {
+    "compatibleRange": "^1.3.0",
+    "dashboardPanels": [
+      {
+        "name": "nowPlaying",
+        "title": "Now Playing",
+        "width": 3,
+        "file": "now-playing/now-playing.html",
+        "headerColor": "#fe5100"
+      },
+      {
+        "name": "eventTimer",
+        "title": "Event Timer",
+        "width": 3,
+        "file": "event-timer/event-timer.html",
+        "headerColor": "#fe5100"
+      },
+      {
+        "name": "runnerTimer",
+        "title": "Runner Timer",
+        "width": 6,
+        "file": "runner-timer/runner-timer.html",
+        "headerColor": "#fe5100",
+        "workspace": "Runner Timer"
+      },
+      {
+        "name": "countdown",
+        "title": "Countdown",
+        "width": 3,
+        "file": "countdown/countdown.html",
+        "headerColor": "#fe5100",
+        "workspace": "Countdown"
+      },
+      {
+        "name": "countdownEdit",
+        "title": "Edit Countdown",
+        "width": 2,
+        "dialog": true,
+        "dialogButtons": [
+          {
+            "name": "save",
+            "type": "confirm"
+          },
+          {
+            "name": "cancel",
+            "type": "dismiss"
+          }
+        ],
+        "file": "countdown/dialog/countdown-edit.html",
+        "headerColor": "#fe5100"
+      },
+      {
+        "name": "donationTotal",
+        "title": "Donation Total",
+        "width": 2,
+        "file": "donations/donation-total.html",
+        "headerColor": "#fe5100",
+        "workspace": "Donations"
+      },
+      {
+        "name": "donationList",
+        "title": "Donations",
+        "width": 4,
+        "file": "donations/donation-list.html",
+        "headerColor": "#fe5100",
+        "workspace": "Donations"
+      },
+      {
+        "name": "donationPolls",
+        "title": "Donation Polls",
+        "width": 4,
+        "file": "donation-polls/donation-poll-list.html",
+        "headerColor": "#fe5100",
+        "workspace": "Goals/Polls"
+      },
+      {
+        "name": "donationGoals",
+        "title": "Donation Goals",
+        "width": 4,
+        "file": "donation-goals/donation-goal-list.html",
+        "headerColor": "#fe5100",
+        "workspace": "Goals/Polls"
+      },
+      {
+        "name": "donationGoalAdd",
+        "title": "Add Donation Goal",
+        "width": 2,
+        "dialog": true,
+        "dialogButtons": [
+          {
+            "name": "save",
+            "type": "confirm"
+          },
+          {
+            "name": "cancel",
+            "type": "dismiss"
+          }
+        ],
+        "file": "donation-goals/dialog/donation-goal-add.html",
+        "headerColor": "#fe5100"
+      },
+      {
+        "name": "schedule",
+        "title": "Schedule",
+        "width": 8,
+        "file": "schedule/schedule-display.html",
+        "headerColor": "#fe5100",
+        "workspace": "Schedule"
+      },
+      {
+        "name": "secretSounds",
+        "title": "Secret Sounds",
+        "width": 8,
+        "file": "secret-sounds/secret-sounds.html",
+        "headerColor": "#fe5100",
+        "workspace": "Secret Sounds"
+      },
+      {
+        "name": "secretSoundAdd",
+        "title": "Add Secret Sound",
+        "width": 2,
+        "dialog": true,
+        "dialogButtons": [
+          {
+            "name": "save",
+            "type": "confirm"
+          },
+          {
+            "name": "cancel",
+            "type": "dismiss"
+          }
+        ],
+        "file": "secret-sounds/dialog/secret-sound-add.html",
+        "headerColor": "#fe5100"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "pre_show.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "16_9_game.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "4_3_game.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "game_race.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "game_race_4.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "changing_game.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "break_screen.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "countdown_screen.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "marathon_total.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "attendee.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "techland.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "next_day.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ],
+    "assetCategories": [
+      {
+        "name": "secret_sound_images",
+        "title": "Secret Sound Images",
+        "allowedTypes": [
+          "png",
+          "jpg",
+          "jpeg"
+        ]
+      }
+    ],
+    "soundCues": [
+      {
+        "name": "secret-sounds",
+        "channels": 1,
+        "assignable": true,
+        "defaultVolume": 20
+      }
+    ]
+  },
+  "resolutions": {
+    "inherits": "2.0.3",
+    "samsam": "1.1.3",
+    "supports-color": "3.1.2",
+    "type-detect": "1.0.0"
+  }
+}

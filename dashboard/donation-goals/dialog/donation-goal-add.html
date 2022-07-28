@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Donation Goal Add</title>
+	</head>
+	<body>
+		<dom-module id="dashboard-donation-goal-add-dialog">
+			<template>
+				<link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+
+				<style is="custom-style">
+					* {
+						box-sizing: border-box;
+					}
+				</style>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend"><span class="input-group-text">Amount</span></div>
+					<input type="currency" id="amount" class="form-control" value="5" required />
+				</div>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend"><span class="input-group-text">Reward</span></div>
+					<input type="text" id="reward" class="form-control" required />
+				</div>
+			</template>
+		</dom-module>
+
+		<script type="module">
+			import "./donation-goal-add.js";
+		</script>
+
+		<dashboard-donation-goal-add-dialog></dashboard-donation-goal-add-dialog>
+	</body>
+</html>

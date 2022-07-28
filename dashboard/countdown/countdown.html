@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Countdown</title>
+
+		<link rel="stylesheet" href="../style/base.css" />
+	</head>
+	<body>
+		<dom-module id="dashboard-countdown-timer">
+			<template>
+				<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+
+				<style is="custom-style">
+					* {
+						box-sizing: border-box;
+					}
+
+					#timer {
+						font-weight: normal;
+						text-align: center;
+						width: 100%;
+					}
+
+					.controls {
+						display: flex;
+						margin-top: 10px;
+					}
+
+					.controls:not(:last-child) {
+						margin-bottom: 15px;
+					}
+
+					.controls .btn:not(:last-child) {
+						margin-right: 15px;
+					}
+
+					button {
+						width: 100%;
+					}
+				</style>
+
+				<h1 id="timer">00:00</h1>
+				<div class="controls">
+					<button id="startTimer" class="btn btn-success">Start</button>
+					<button id="stopTimer" class="btn btn-danger" disabled>Stop</button>
+				</div>
+				<div class="controls">
+					<button id="editCountdown" class="btn btn-warning" nodecg-dialog="countdownEdit">Edit</button>
+				</div>
+			</template>
+		</dom-module>
+
+		<script type="module">
+			import "./countdown.js";
+		</script>
+
+		<dashboard-countdown-timer></dashboard-countdown-timer>
+	</body>
+</html>

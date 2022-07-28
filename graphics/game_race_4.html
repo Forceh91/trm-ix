@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Game Race</title>
+
+    <link rel="stylesheet" href="style/layout.css" />
+    <link rel="stylesheet" href="../shared/fonts/fontawesome/font-awesome.min.css" />
+    <link rel="stylesheet" href="../shared/fonts/exo2/exo2.css" />
+  </head>
+
+  <style>
+    #container {
+      background: transparent;
+      font-family: "Exo 2", sans-serif;
+      left: 0;
+      top: 0;
+      position: fixed;
+      width: 1920px;
+      height: 1080px;
+    }
+  </style>
+
+  <body>
+    <div id="container">
+      <layout-app></layout-app>
+    </div>
+
+    <dom-module id="layout-app">
+      <template>
+        <style>
+          * {
+            box-sizing: border-box;
+          }
+
+          #omnibar_container {
+            background: #333;
+            color: #ddd;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+          }
+
+          #middle_bar {
+            background: #333;
+            border: 4px solid var(--marathon-col);
+            border-bottom: 0;
+            flex-direction: column;
+            display: flex;
+            height: calc(100% - 50px);
+            left: calc(50% - 225px);
+            position: absolute;
+            top: 0px;
+            width: 450px;
+            z-index: 1;
+          }
+
+          #middle_bar:before {
+            content: " ";
+            background-image: url("./img/SJPlayLiveBG.png");
+            background-size: cover;
+            opacity: 0.2;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+          }
+
+          #run_container {
+            border-top: 4px solid var(--marathon-col);
+            color: #ddd;
+            height: 340px;
+            padding: 15px;
+            width: 100%;
+          }
+
+          #incentives_container {
+            align-self: flex-end;
+            background: #333;
+            color: #ddd;
+            display: flex;
+            height: 340px;
+            width: 100%;
+          }
+
+          #donations_container {
+            align-items: center;
+            background: #333;
+            border-top: 4px solid var(--marathon-col);
+            color: #ddd;
+            display: flex;
+            height: 340px;
+            justify-content: center;
+            width: 100%;
+          }
+
+          #donations_container trm-donation-notifier {
+            height: 100%;
+          }
+
+          #split_bar {
+            border-top: 4px solid var(--marathon-col);
+            top: calc(50% - 4px);
+            width: 100%;
+            position: absolute;
+          }
+
+          #timer {
+            position: absolute;
+          }
+
+          #timer.left {
+            left: 0;
+          }
+
+          #timer.right {
+            right: 0;
+          }
+
+          #timer.top {
+            top: calc(50% - 50px);
+          }
+
+          #timer.bottom {
+            top: calc(50%);
+          }
+        </style>
+
+        <div id="middle_bar">
+          <div id="incentives_container">
+            <trm-donation-incentives horizontal="true" />
+          </div>
+
+          <div id="run_container">
+            <trm-run-info horizontal="true" />
+          </div>
+
+          <div id="donations_container">
+            <trm-donation-notifier />
+          </div>
+        </div>
+
+        <div id="omnibar_container">
+          <trm-omnibar />
+        </div>
+
+        <div id="split_bar"></div>
+        <trm-runner-nameplate id="timer" class="left top" runnerid="0" setsize></trm-runner-nameplate>
+        <trm-runner-nameplate id="timer" class="right top" runnerid="1" setsize rightalign></trm-runner-nameplate>
+        <trm-runner-nameplate id="timer" class="left bottom" runnerid="2" setsize></trm-runner-nameplate>
+        <trm-runner-nameplate id="timer" class="right bottom" runnerid="3" setsize rightalign></trm-runner-nameplate>
+      </template>
+
+      <script type="module">
+        import { PolymerElement } from "../node_modules/@polymer/polymer/polymer-element.js";
+
+        class GameRace4 extends PolymerElement {
+          static get is() {
+            return "layout-app";
+          }
+        }
+
+        customElements.define(GameRace4.is, GameRace4);
+      </script>
+    </dom-module>
+
+    <script type="module">
+      import "../shared/imports/required.js";
+      import "./elements/parents/trm-omnibar/trm-omnibar.js";
+      import "./elements/parents/trm-donation-notifier/trm-donation-notifier.js";
+      import "./elements/parents/trm-donation-incentives/trm-donation-incentives.js";
+      import "./elements/parents/trm-run-info/trm-run-info.js";
+      import "./elements/parents/trm-runner-nameplate/trm-runner-nameplate.js";
+
+      window.addEventListener("DOMContentLoaded", () => {
+        TweenLite.to(document.body, 0.333, {
+          opacity: 1,
+          ease: Power1.easeOut,
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Schedule</title>
+
+		<link rel="stylesheet" href="../style/base.css" />
+	</head>
+	<body>
+		<dom-module id="dashboard-schedule-display">
+			<template>
+				<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+
+				<style>
+					* {
+						box-sizing: border-box;
+					}
+
+					.schedule-item-container {
+						display: block;
+						float: left;
+						width: 50%;
+					}
+
+					.schedule-item-container:not(:last-child) {
+						margin-right: 15px;
+						width: calc(50% - 15px);
+					}
+
+					#currentGame {
+						color: var(--marathon-col);
+						font-weight: bold;
+					}
+
+					button {
+						width: 100%;
+					}
+
+					.btn:not(:last-child) {
+						margin-right: 15px;
+					}
+
+					.row {
+						display: flex;
+					}
+
+					.controls {
+						display: flex;
+						margin-top: 20px;
+					}
+
+					h4 {
+						font-size: 1rem;
+						text-transform: uppercase;
+						margin: 0;
+						margin-bottom: 20px;
+					}
+				</style>
+
+				<div class="row no-gutters">
+					<div class="schedule-item-container">
+						<h4>Current Playing</h4>
+						<div id="currentGame"><h4>Please wait...</h4></div>
+					</div>
+					<div class="schedule-item-container">
+						<h4>Next Up</h4>
+						<div id="nextGame"><h4>Please wait...</h4></div>
+					</div>
+				</div>
+				<div class="controls">
+					<button type="button" class="btn btn-sm btn-primary" id="selectPrevGame" disabled>Prev Game</button>
+					<button type="button" class="btn btn-sm btn-danger" id="selectNextGame">Next Game</button>
+				</div>
+				<div class="controls">
+					<button type="button" class="btn btn-sm btn-warning" id="fetchSchedule"><span id="fetch">Fetch Schedule</span></button>
+				</div>
+			</template>
+		</dom-module>
+
+		<script type="module">
+			import "./schedule-display.js";
+			import "./schedule-display-item.js";
+		</script>
+
+		<dashboard-schedule-display></dashboard-schedule-display>
+	</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tech Land</title>
+
+    <link rel="stylesheet" href="style/layout.css" />
+    <link rel="stylesheet" href="../shared/fonts/fontawesome/font-awesome.min.css" />
+    <link rel="stylesheet" href="../shared/fonts/exo2/exo2.css" />
+    <script src="../node_modules/moment/min/moment.min.js"></script>
+  </head>
+
+  <style>
+    #container {
+      background: #333;
+      color: #ddd;
+      font-family: "Exo 2", sans-serif;
+      left: 0;
+      top: 0;
+      position: fixed;
+      width: 1920px;
+      height: 1080px;
+    }
+  </style>
+
+  <body>
+    <div id="container">
+      <layout-app></layout-app>
+    </div>
+
+    <dom-module id="layout-app">
+      <template>
+        <style>
+          * {
+            box-sizing: border-box;
+          }
+
+          #top_split {
+            height: 50vh;
+            padding: 15px 0;
+            width: 100vw;
+          }
+
+          #top_split h1 {
+            font-size: 25px;
+            margin: 0;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100%;
+          }
+
+          #left_col {
+            display: flex;
+            float: left;
+            padding: 15px;
+            padding-bottom: 0;
+            width: 50vw;
+          }
+
+          #right_col {
+            display: flex;
+            flex-direction: column;
+            float: left;
+            padding: 15px;
+            padding-bottom: 0;
+            width: 50vw;
+          }
+
+          #right_col > div {
+            width: 100%;
+          }
+
+          #right_col > div:not(:first-child) {
+            margin-top: 30px;
+          }
+
+          #bottom_split {
+            display: flex;
+            flex-direction: column;
+            float: left;
+            padding: 15px;
+            padding-top: 0;
+            width: 100vw;
+          }
+
+          .info-title {
+            color: #cacaca;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            width: 100%;
+          }
+
+          .info-text {
+            font-size: 18px;
+            font-weight: normal;
+            width: 100%;
+          }
+        </style>
+
+        <div id="top_split">
+          <h1>TRM Tech Desk</h1>
+          <div id="left_col">
+            <trm-techland-transition-controller></trm-techland-transition-controller>
+          </div>
+          <div id="right_col">
+            <div>
+              <div class="info-title">Current Run</div>
+              <div class="info-text">
+                <trm-techland-current-run></trm-techland-current-run>
+              </div>
+            </div>
+
+            <div>
+              <div class="info-title">Current Twitch Title</div>
+              <div class="info-text">
+                <trm-techland-twitch-title></trm-techland-twitch-title>
+              </div>
+            </div>
+
+            <div>
+              <div class="info-title">Ad Status</div>
+              <div class="info-text"><trm-techland-twitch-ad-status></trm-techland-twitch-ad-status></div>
+            </div>
+
+            <div>
+              <div class="info-title">Currently Playing Track</div>
+              <div class="info-text"><trm-techland-now-playing></trm-techland-now-playing></div>
+            </div>
+
+            <div>
+              <div class="info-title">Donation Total</div>
+              <div class="info-text">
+                <trm-techland-total></trm-techland-total>
+              </div>
+            </div>
+          </div>
+          <div id="bottom_split">
+            <trm-techland-obs-preview></trm-techland-obs-preview>
+          </div>
+        </div>
+      </template>
+
+      <script type="module">
+        import { PolymerElement } from "../node_modules/@polymer/polymer/polymer-element.js";
+
+        class TechLandScreen extends PolymerElement {
+          static get is() {
+            return "layout-app";
+          }
+        }
+
+        customElements.define(TechLandScreen.is, TechLandScreen);
+      </script>
+    </dom-module>
+
+    <script type="module">
+      import "../shared/imports/required.js";
+      import "./elements/children/trm-techland/trm-techland-total.js";
+      import "./elements/children/trm-techland/trm-techland-current-run.js";
+      import "./elements/children/trm-techland/trm-techland-twitch-title.js";
+      import "./elements/children/trm-techland/trm-techland-twitch-ad-status.js";
+      import "./elements/children/trm-techland/trm-techland-now-playing.js";
+      import "./elements/children/trm-techland/trm-techland-transition-controller.js";
+      import "./elements/children/trm-techland/trm-techland-obs-preview.js";
+
+      window.addEventListener("DOMContentLoaded", () => {
+        TweenLite.to(document.body, 0.333, {
+          opacity: 1,
+          ease: Power1.easeOut,
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+:root {
+	--marathon-col: #ffa301;
+	--marathon-alt-col: #fe5100;
+
+	--dashboard-success-col: #0fac33;
+	--dashboard-danger-col: #e74c3c;
+	--dashboard-info-col: #3498db;
+}
+
+.no-gutters {
+	margin-right: 0;
+	margin-left: 0;
+
+	> .col,
+	> [class*="col-"] {
+		padding-right: 0;
+		padding-left: 0;
+	}
+}
