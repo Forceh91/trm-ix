@@ -221,6 +221,7 @@ module.exports = (nodecg) => {
   });
 
   nodecg.listenFor("obs:show_live_game_screen", () => {
+    setPreview(`game_${scheduleSeek.value}`);
     transitionScene();
     setTimeout(() => {
       setPreview(`game_change`);
