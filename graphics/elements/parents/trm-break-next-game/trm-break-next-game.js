@@ -41,6 +41,10 @@ class TRMBreakNextGame extends PolymerElement {
           width: 100%;
         }
 
+        #body.hidden {
+          display: none;
+        }
+
         #content {
           padding: 20px;
           height: 100%;
@@ -109,7 +113,7 @@ class TRMBreakNextGame extends PolymerElement {
 
       <div id="body">
         <div id="content">
-          <h1 class="main-title">Up Next</h1>
+          <h1 id="main_title" class="main-title">Up Next</h1>
 
           <div class="text">
             <div class="row">
@@ -141,6 +145,7 @@ class TRMBreakNextGame extends PolymerElement {
   static get properties() {
     return {
       wide: Boolean,
+      isFuture: Boolean,
     };
   }
 
@@ -208,10 +213,30 @@ class TRMBreakNextGame extends PolymerElement {
     });
   }
 
+  updateTitle(nextRunScheduled) {
+    if (!this.isFuture) return;
+
+    const distance = this.calculateTimeUntilNextRun(nextRunScheduled);
+    let distanceString = "";
+    if (distance && distance.length) distanceString = `(In ${distance})`;
+    this.$.main_title && (this.$.main_title.innerText = `After That ${distanceString}`).trim();
+    this.$.body.style.opacity = 0.75;
+  }
+
   showRunInfo() {
     const tempSchedule = schedule.value;
-    const run = tempSchedule[scheduleSeek.value];
+
+    // if in the future hide if not there and show if there
+    const ix = this.isFuture ? scheduleSeek.value + 1 : scheduleSeek.value;
+    if (ix >= tempSchedule.length) return this.$.body.classList.add("hidden");
+    else this.$.body.classList.remove("hidden");
+
+    // get run data
+    const run = tempSchedule[ix];
     const rundata = run && run.data;
+
+    // update the title
+    this.updateTitle(run.scheduled_t);
 
     const regex = /(\w+)/;
     // we may have a list of runners (ie a race)
@@ -255,6 +280,11 @@ class TRMBreakNextGame extends PolymerElement {
     return `${msObject.minute > 9 ? msObject.minute : "0" + msObject.minute}:${
       msObject.second > 9 ? msObject.second : "0" + msObject.second
     }`;
+  }
+
+  calculateTimeUntilNextRun(nextRunScheduled) {
+    const now = Date.now();
+    return dateFns.distanceInWords(nextRunScheduled * 1000, now);
   }
 }
 
