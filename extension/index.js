@@ -110,4 +110,12 @@ module.exports = function (nodecg) {
     nodecg.log.error('Failed to load "obs-controller" lib:', e.stack);
     process.exit(1);
   }
+
+  // discord controller
+  try {
+    require("./discord-controller")(nodecg);
+  } catch (e) {
+    nodecg.log.error('Failed to load "discord-controller" lib:', e.stack);
+    process.exit(1);
+  }
 };
