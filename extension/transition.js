@@ -7,44 +7,54 @@ const TRANSITION_STAGES = {
     title: "Switch OBS to setup screen",
     requiresInput: false,
   },
-  UPDATE_TO_NEXT_GAME: {
+  MOVE_LIVE_COMMS_TO_TRANSITION_COMMS: {
     id: 1,
+    title: "Move comms from live to transition",
+    requiresInput: false,
+  },
+  UPDATE_TO_NEXT_GAME: {
+    id: 2,
     title: "Update stream overlay game",
     requiresInput: false,
   },
   UPDATE_TWITCH_TITLE: {
-    id: 2,
+    id: 3,
     title: "Update Twitch title/game",
     requiresInput: false,
   },
   RUN_ADVERTS: {
-    id: 3,
+    id: 4,
     title: "Run Twitch adverts",
     requiresInput: false,
   },
   START_MUSIC: {
-    id: 4,
+    id: 5,
     title: "Start music",
     requiresInput: false,
   },
   CONFIRM_RUNNERS_READY: {
-    id: 5,
+    id: 6,
     title: "Confirm runners ready",
     requiresInput: true,
   },
   BEGIN_TRANSITION_TO_GAME: {
-    id: 6,
+    id: 7,
     title: "Start transition to LIVE",
     requiresInput: true,
   },
   STOP_MUSIC: {
-    id: 7,
+    id: 8,
     title: "Stop music",
     requiresInput: false,
   },
   SHOW_GAME_SCREEN: {
-    id: 8,
+    id: 9,
     title: "Switch OBS to game screen",
+    requiresInput: false,
+  },
+  MOVE_TRANSITION_COMMS_TO_LIVE_COMMS: {
+    id: 10,
+    title: "Move comms from transition to live",
     requiresInput: false,
   },
   GAME_SCREEN_VISIBLE: {
@@ -129,6 +139,7 @@ module.exports = (nodecg) => {
       callback([
         TRANSITION_STAGES.GAME_SCREEN_VISIBLE,
         TRANSITION_STAGES.TRANSITION_TO_SETUP_SCREEN,
+        TRANSITION_STAGES.MOVE_LIVE_COMMS_TO_TRANSITION_COMMS,
         TRANSITION_STAGES.UPDATE_TO_NEXT_GAME,
         TRANSITION_STAGES.UPDATE_TWITCH_TITLE,
         TRANSITION_STAGES.RUN_ADVERTS,
@@ -137,6 +148,7 @@ module.exports = (nodecg) => {
         TRANSITION_STAGES.BEGIN_TRANSITION_TO_GAME,
         TRANSITION_STAGES.STOP_MUSIC,
         TRANSITION_STAGES.SHOW_GAME_SCREEN,
+        TRANSITION_STAGES.MOVE_TRANSITION_COMMS_TO_LIVE_COMMS,
       ]);
   });
 
@@ -180,11 +192,11 @@ module.exports = (nodecg) => {
       const transitionState = transitionStateReplicant.value;
       switch (transitionState.stage.id) {
         case TRANSITION_STAGES.TRANSITION_TO_SETUP_SCREEN.id:
-          if (transitionState.state === STATE.WORKING) startStreamOverlayRunUpdate();
+          if (transitionState.state === STATE.WORKING) moveLiveCommsToTransition();
           break;
 
         case TRANSITION_STAGES.SHOW_GAME_SCREEN.id:
-          if (transitionState.state === STATE.WORKING) completeTransitionToGameScreen();
+          if (transitionState.state === STATE.WORKING) moveTransitionCommsToLive();
           break;
       }
     }
@@ -193,6 +205,18 @@ module.exports = (nodecg) => {
   function startOBSTransitionToGameChange() {
     nodecg.log.info("[TRANSITION]", "Switching to game change screen");
     nodecg.sendMessage("obs:show_game_change_screen");
+  }
+
+  function moveLiveCommsToTransition() {
+    nodecg.log.info("[TRANSITION]", "Moving comms from LIVE to TRANSITION");
+    const nextStage = TRANSITION_STAGES.MOVE_LIVE_COMMS_TO_TRANSITION_COMMS;
+    transitionStateReplicant.value = {
+      stage: nextStage,
+      state: nextStage.requiresInput ? STATE.PENDING : STATE.WORKING,
+    };
+
+    nodecg.sendMessage("discord:move_voice_from_live_to_transition");
+    startStreamOverlayRunUpdate();
   }
 
   function startStreamOverlayRunUpdate() {
@@ -289,6 +313,18 @@ module.exports = (nodecg) => {
 
     nodecg.log.info("[TRANSITION]", "Moving to game screen");
     nodecg.sendMessage("obs:show_live_game_screen");
+  }
+
+  function moveTransitionCommsToLive() {
+    nodecg.log.info("[TRANSITION]", "Moving comms from TRANSITION to LIVE");
+    const nextStage = TRANSITION_STAGES.MOVE_TRANSITION_COMMS_TO_LIVE_COMMS;
+    transitionStateReplicant.value = {
+      stage: nextStage,
+      state: nextStage.requiresInput ? STATE.PENDING : STATE.WORKING,
+    };
+
+    nodecg.sendMessage("discord:move_voice_from_transition_to_live");
+    completeTransitionToGameScreen();
   }
 
   function completeTransitionToGameScreen() {

@@ -189,8 +189,8 @@ class TRMTechLandTransitionController extends PolymerElement {
 
     if (state.stage.id !== -1) this.disableBeginTransmission(); // past game screen
     if (state.stage.id === -1) this.enableBeginTransmission(); // on game screen
-    if (state.stage.id === 5 && state.state !== 2) this.enableConfirmRunnersReady();
-    if (state.stage.id === 6 && state.state !== 2) this.enableConfirmTransitionToLive();
+    if (state.stage.id === 6 && state.state !== 2) this.enableConfirmRunnersReady();
+    if (state.stage.id === 7 && state.state !== 2) this.enableConfirmTransitionToLive();
   }
 
   enableBeginTransmission() {
