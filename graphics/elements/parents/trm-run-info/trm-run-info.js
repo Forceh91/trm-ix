@@ -56,7 +56,6 @@ class TRMRunInfo extends PolymerElement {
           background: #444;
           font-size: 25px;
           display: flex;
-          align-items: center;
           width: 100%;
         }
 
@@ -74,6 +73,8 @@ class TRMRunInfo extends PolymerElement {
         }
 
         .run_container .run-info-block .run-info-text {
+          align-items: center;
+          display: flex;
           padding: 0 10px;
         }
 
