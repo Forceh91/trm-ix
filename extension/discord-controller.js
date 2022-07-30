@@ -1,9 +1,8 @@
 "use strict";
 
-// "discord_comms_bot_user": "TRMComms",
-// "discord_comms_bot_discriminator": "9028",
-
 module.exports = (nodecg) => {
+  const voiceUsers = nodecg.Replicant("discord:voice_users", { defaultValue: [] });
+
   const apiToken = nodecg.bundleConfig.discord_api_private;
   const permissions = 16778240;
 
@@ -16,9 +15,16 @@ module.exports = (nodecg) => {
 
   client.on("ready", () => {
     console.log(`[DISCORD] Logged in as ${client.user.tag}!`);
+
+    fetchUsersInLiveChannel();
   });
 
   client.login(apiToken);
+
+  client.on("voiceStateUpdate", (oldState, newState) => {
+    // when voice state is updated, fetch the users in the live channel
+    fetchUsersInLiveChannel();
+  });
 
   function getTransitionChannel() {
     return client.channels.cache.find((chan) => chan.name === "Transition") || null;
@@ -58,6 +64,20 @@ module.exports = (nodecg) => {
     if (!comms) return;
 
     comms.voice.setChannel(transitionChannel);
+  }
+
+  function fetchUsersInLiveChannel() {
+    const liveChannel = getLiveChannel();
+    if (!liveChannel) return;
+
+    // get members and ignore our bot
+    const { members } = liveChannel;
+    const filteredMembers = members
+      .map((member) => member.user)
+      .filter((user) => user && user.username !== COMMS_USER_NAME);
+
+    // store this as the value
+    voiceUsers.value = filteredMembers || [];
   }
 
   nodecg.listenFor("discord:move_voice_from_live_to_transition", () => {
