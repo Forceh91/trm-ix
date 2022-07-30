@@ -1,6 +1,6 @@
 # Tomb Raider Marathon Bundle
 
-TRM bundle for NodeCG with built in Tiltify. This bundle was used during TRM VIII.
+TRM bundle for NodeCG with built in Tiltify. This bundle was used during TRM IX.
 
 Marathon colour is: #ffa301 / #fe5100
 
