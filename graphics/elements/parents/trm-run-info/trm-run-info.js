@@ -127,11 +127,6 @@ class TRMRunInfo extends PolymerElement {
         </div>
 
         <div class="run_container run-info-block">
-          <div class="run-info-type"><i class="fas fa-gamepad"></i></div>
-          <div class="run-info-text" id="platform"></div>
-        </div>
-
-        <div class="run_container run-info-block">
           <div class="run-info-type"><i class="fas fa-stopwatch"></i></div>
           <div class="run-info-text timer">
             <div id="timer"></div>
@@ -263,8 +258,11 @@ class TRMRunInfo extends PolymerElement {
 
     this.$.runner.innerText = runnerName || "N/A";
     this.$.run_title.innerText = rundata[0] || "N/A";
-    this.$.run_category.innerText = rundata[3] || "Casual";
-    this.$.platform.innerText = `${rundata[4] || "N/A"} (${rundata[5] || "N/A"})`;
+
+    let categoryText = rundata[3] || "Casual";
+    const platform = rundata[4];
+    if (platform) categoryText += ` / ${platform}`;
+    this.$.run_category.innerText = categoryText;
 
     this.$.estimate.innerText = this.calculateRunLength(rundata.length_t) || "00:00";
   }
