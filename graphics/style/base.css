@@ -4,6 +4,7 @@
   --marathon-col: #ffa301;
   --marathon-alt-col: #fe5100;
   --omnibar-height: 65px;
+  --transition-screen-content-width: 600px;
 }
 
 * {
@@ -18,6 +19,10 @@ body {
   font-family: var(--overpass-font);
   margin: 0;
   opacity: 0;
+}
+
+html {
+  font-size: 18px;
 }
 
 #container {
