@@ -181,11 +181,6 @@
     ],
     "graphics": [
       {
-        "file": "pre_show.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
         "file": "16_9_game.html",
         "width": 1920,
         "height": 1080
