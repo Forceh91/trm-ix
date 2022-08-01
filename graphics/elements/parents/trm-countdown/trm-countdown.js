@@ -17,6 +17,7 @@ class TRMCountdownTimer extends PolymerElement {
           color: #fff;
           display: flex;
           font-size: 3rem;
+          font-variant-numeric: tabular-nums;
           font-weight: bold;
           justify-content: center;
           padding: 0 10px;

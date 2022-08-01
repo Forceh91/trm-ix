@@ -4,7 +4,10 @@ import "../../children/trm-omnibar/trm-omnibar-total.js";
 import "../../children/trm-omnibar/trm-omnibar-timer.js";
 import "../../children/trm-omnibar/trm-omnibar-levels.js";
 import { html } from "../../../../node_modules/@polymer/polymer/lib/utils/html-tag.js";
-import { beforeNextRender, afterNextRender } from "../../../../node_modules/@polymer/polymer/lib/utils/render-status.js";
+import {
+  beforeNextRender,
+  afterNextRender,
+} from "../../../../node_modules/@polymer/polymer/lib/utils/render-status.js";
 import { flush } from "../../../../node_modules/@polymer/polymer/lib/utils/flush.js";
 import { PolymerElement } from "../../../../node_modules/@polymer/polymer/polymer-element.js";
 
@@ -19,197 +22,206 @@ const donationGoals = nodecg.Replicant("donationGoals");
 const donationPolls = nodecg.Replicant("donationpolls");
 
 class TRMOmnibar extends PolymerElement {
-	static get template() {
-		return html`
-			<style>
-				* {
-					box-sizing: border-box;
-				}
+  static get template() {
+    return html`
+      <style>
+        * {
+          box-sizing: border-box;
+        }
 
-				:host {
-					border-top: 4px solid var(--marathon-col);
-					display: flex;
-					height: 100%;
-					overflow: hidden;
-					width: 100%;
-				}
+        :host {
+          border-top: 4px solid var(--marathon-col);
+          display: flex;
+          height: 100%;
+          overflow: hidden;
+          width: 100%;
+        }
 
-				#container {
-					align-items: center;
-					display: flex;
-					font-size: 23px;
-					height: 100%;
-					width: 100%;
-				}
+        #container {
+          align-items: center;
+          display: flex;
+          font-size: 28px;
+          height: 100%;
+          width: 100%;
+        }
 
-				#timer {
-					height: 100%;
-					justify-content: flex-start;
-				}
+        #logo {
+          height: 100%;
+        }
 
-				#body {
-					align-items: center;
-					display: flex;
-					height: 100%;
-					overflow: hidden;
-					max-width: 100%;
-					width: 100%;
-				}
+        #logo img {
+          height: 100%;
+          padding: 5px 20px;
+        }
 
-				#body #content {
-					height: 100%;
-					width: 100%;
-				}
+        #timer {
+          height: 100%;
+          justify-content: flex-start;
+        }
 
-				#total {
-					height: 100%;
-					margin-left: auto;
-				}
-			</style>
+        #body {
+          align-items: center;
+          display: flex;
+          height: 100%;
+          overflow: hidden;
+          max-width: 100%;
+          width: 100%;
+        }
 
-			<div id="container">
-				<trm-omnibar-timer id="timer"></trm-omnibar-timer>
-				<div id="body">
-					<div id="content"></div>
-				</div>
-				<trm-omnibar-total id="total"></trm-omnibar-total>
-			</div>
-		`;
-	}
+        #body #content {
+          height: 100%;
+          width: 100%;
+        }
 
-	static get is() {
-		return "trm-omnibar";
-	}
+        #total {
+          height: 100%;
+          margin-left: auto;
+        }
+      </style>
 
-	static get properties() {
-		return {
-			hideDeaths: Boolean,
-			hideTimer: Boolean,
-			hidetotal: Boolean
-		};
-	}
+      <div id="container">
+        <div id="logo"><img src="./img/logo.png" /></div>
+        <trm-omnibar-timer id="timer"></trm-omnibar-timer>
+        <div id="body">
+          <div id="content"></div>
+        </div>
+        <trm-omnibar-total id="total"></trm-omnibar-total>
+      </div>
+    `;
+  }
 
-	ready() {
-		super.ready();
+  static get is() {
+    return "trm-omnibar";
+  }
 
-		// list of replicants we need
-		const replicants = [total, timer, donationGoals, donationPolls];
+  static get properties() {
+    return {
+      hideDeaths: Boolean,
+      hideTimer: Boolean,
+      hidetotal: Boolean,
+    };
+  }
 
-		let numDeclared = 0;
-		replicants.forEach((replicant) => {
-			replicant.once("change", () => {
-				numDeclared++;
+  ready() {
+    super.ready();
 
-				if (numDeclared == replicants.length) {
-					beforeNextRender(this, this.run);
-				}
-			});
-		});
+    // list of replicants we need
+    const replicants = [total, timer, donationGoals, donationPolls];
 
-		if (this.hidetotal) this.$.total.style.display = "none";
+    let numDeclared = 0;
+    replicants.forEach((replicant) => {
+      replicant.once("change", () => {
+        numDeclared++;
 
+        if (numDeclared == replicants.length) {
+          beforeNextRender(this, this.run);
+        }
+      });
+    });
 
-		if (this.dataset) {
-			if (this.dataset.hideTimer === "true") {
-				this.$.timer.style.display = "none";
-			}
-		}
-	}
+    if (this.hidetotal) this.$.total.style.display = "none";
 
-	run() {
-		const self = this;
-		const parts = [this.showCTA, this.showSocials, this.showLevels];
+    if (this.dataset) {
+      if (this.dataset.hideTimer === "true") {
+        this.$.timer.style.display = "none";
+      }
+    }
+  }
 
-		function processNextPart() {
-			if (parts.length > 0) {
-				const part = parts.shift().bind(self);
-				promisifyTimeline(part())
-					.then(processNextPart)
-					.catch((error) => {
-						nodecg.log.error("Error when running main loop:", error);
-					});
-			} else {
-				self.run();
-			}
-		}
+  run() {
+    const self = this;
+    const parts = [this.showCTA, this.showSocials, this.showLevels];
 
-		function promisifyTimeline(tl) {
-			return new Promise((resolve) => {
-				tl.call(resolve, null, null, "+=0.03");
-			});
-		}
+    function processNextPart() {
+      if (parts.length > 0) {
+        const part = parts.shift().bind(self);
+        promisifyTimeline(part())
+          .then(processNextPart)
+          .catch((error) => {
+            nodecg.log.error("Error when running main loop:", error);
+          });
+      } else {
+        self.run();
+      }
+    }
 
-		processNextPart();
-	}
+    function promisifyTimeline(tl) {
+      return new Promise((resolve) => {
+        tl.call(resolve, null, null, "+=0.03");
+      });
+    }
 
-	setContent(tl, element) {
-		tl.to({}, 0.03, {});
-		tl.call(() => {
-			tl.pause();
-			this.$.content.innerHTML = "";
-			this.$.content.appendChild(element);
-			flush();
-			afterNextRender(this, () => {
-				flush();
-				requestAnimationFrame(() => {
-					tl.resume(null, false);
-				});
-			});
-		});
-	}
+    processNextPart();
+  }
 
-	showContent(tl, element) {
-		tl.to({}, 0.03, {});
-		tl.call(() => {
-			tl.pause();
+  setContent(tl, element) {
+    tl.to({}, 0.03, {});
+    tl.call(() => {
+      tl.pause();
+      this.$.content.innerHTML = "";
+      this.$.content.appendChild(element);
+      flush();
+      afterNextRender(this, () => {
+        flush();
+        requestAnimationFrame(() => {
+          tl.resume(null, false);
+        });
+      });
+    });
+  }
 
-			const elementEntranceAnim = element.enter(DISPLAY_DURATION, SCROLL_HOLD_DURATION);
-			elementEntranceAnim.call(tl.resume, null, tl);
-		});
-	}
+  showContent(tl, element) {
+    tl.to({}, 0.03, {});
+    tl.call(() => {
+      tl.pause();
 
-	hideContent(tl, element) {
-		tl.to({}, 0.03, {});
-		tl.call(() => {
-			tl.pause();
+      const elementEntranceAnim = element.enter(DISPLAY_DURATION, SCROLL_HOLD_DURATION);
+      elementEntranceAnim.call(tl.resume, null, tl);
+    });
+  }
 
-			const elementExitAnim = element.exit();
-			elementExitAnim.call(tl.resume, null, tl);
-		});
-	}
+  hideContent(tl, element) {
+    tl.to({}, 0.03, {});
+    tl.call(() => {
+      tl.pause();
 
-	showCTA() {
-		const tl = new TimelineLite();
-		const trmCTA = document.createElement("trm-omnibar-cta");
+      const elementExitAnim = element.exit();
+      elementExitAnim.call(tl.resume, null, tl);
+    });
+  }
 
-		this.setContent(tl, trmCTA);
-		this.showContent(tl, trmCTA);
-		this.hideContent(tl, trmCTA);
+  showCTA() {
+    const tl = new TimelineLite();
+    const trmCTA = document.createElement("trm-omnibar-cta");
 
-		return tl;
-	}
+    this.setContent(tl, trmCTA);
+    this.showContent(tl, trmCTA);
+    this.hideContent(tl, trmCTA);
 
-	showSocials() {
-		const tl = new TimelineLite();
-		const trmSocials = document.createElement("trm-omnibar-socials");
+    return tl;
+  }
 
-		this.setContent(tl, trmSocials);
-		this.showContent(tl, trmSocials);
-		this.hideContent(tl, trmSocials);
+  showSocials() {
+    const tl = new TimelineLite();
+    const trmSocials = document.createElement("trm-omnibar-socials");
 
-		return tl;
-	}
+    this.setContent(tl, trmSocials);
+    this.showContent(tl, trmSocials);
+    this.hideContent(tl, trmSocials);
 
-	showLevels() {
-		const tl = new TimelineLite();
+    return tl;
+  }
 
-		const trmLevels = document.createElement("trm-omnibar-levels");
-		this.setContent(tl, trmLevels);
-		this.showContent(tl, trmLevels);
-		this.hideContent(tl, trmLevels);
+  showLevels() {
+    const tl = new TimelineLite();
 
-		return tl;
-	}
+    const trmLevels = document.createElement("trm-omnibar-levels");
+    this.setContent(tl, trmLevels);
+    this.showContent(tl, trmLevels);
+    this.hideContent(tl, trmLevels);
+
+    return tl;
+  }
 }
 
 customElements.define(TRMOmnibar.is, TRMOmnibar);

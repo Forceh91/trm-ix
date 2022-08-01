@@ -12,7 +12,7 @@ class TRMOmnibarTotal extends PolymerElement {
           background: #444;
           color: #ddd;
           display: flex;
-          font-size: 30px;
+          font-size: 35px;
           height: 100%;
           padding: 0 10px;
         }

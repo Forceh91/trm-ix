@@ -15,7 +15,7 @@ class TRMOmnibarTimer extends PolymerElement {
           background: #444;
           color: #ddd;
           display: flex;
-          font-size: 30px;
+          font-size: 35px;
           font-variant-numeric: tabular-nums;
           height: 100%;
           padding: 0 10px;
