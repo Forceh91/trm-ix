@@ -1,153 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>Attendee Screen</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Attendee Screen</title>
 
-		<link rel="stylesheet" href="style/layout.css" />
-		<link rel="stylesheet" href="../shared/fonts/fontawesome/font-awesome.min.css" />
-		<link rel="stylesheet" href="../shared/fonts/exo2/exo2.css" />
-		<script src="../node_modules/moment/min/moment.min.js"></script>
-	</head>
+    <link rel="stylesheet" href="style/layout.css" />
+    <link rel="stylesheet" href="../shared/fonts/fontawesome/font-awesome.min.css" />
+    <script src="../node_modules/moment/min/moment.min.js"></script>
+  </head>
 
-	<style>
-		#container {
-			background: #333;
-			color: #ddd;
-			font-family: "Exo 2", sans-serif;
-			left: 0;
-			top: 0;
-			position: fixed;
-			width: 1920px;
-			height: 1080px;
-		}
-	</style>
+  <style>
+    #container {
+      background: #333;
+      color: #ddd;
+    }
+  </style>
 
-	<body>
-		<div id="container">
-			<layout-app></layout-app>
-		</div>
+  <body>
+    <div id="container">
+      <layout-app></layout-app>
+    </div>
 
-		<dom-module id="layout-app">
-			<template>
-				<style>
-					* {
-						box-sizing: border-box;
-					}
+    <dom-module id="layout-app">
+      <template>
+        <style>
+          * {
+            box-sizing: border-box;
+          }
 
-					#top-bar {
-						border-bottom: 1px solid #cacaca;
-						display: flex;
-						height: 45px;
-						width: 100%;
-					}
+          #top-bar {
+            border-bottom: 1px solid #cacaca;
+            display: flex;
+            height: 45px;
+            width: 100%;
+          }
 
-					#timer {
-						text-align: left;
-						width: 100%;
-					}
+          #timer {
+            text-align: left;
+            width: 100%;
+          }
 
-					#datetime {
-						text-align: right;
-						width: 100%;
-					}
+          #datetime {
+            text-align: right;
+            width: 100%;
+          }
 
-					#left-col {
-						float: left;
-						padding: 15px;
-						width: 50%;
-					}
+          #left-col {
+            float: left;
+            padding: 15px;
+            width: 50%;
+          }
 
-					#right-col {
-						float: left;
-						padding: 15px;
-						width: 50%;
-					}
+          #right-col {
+            float: left;
+            padding: 15px;
+            width: 50%;
+          }
 
-					#donation-total {
-						width: 100%;
-					}
+          #donation-total {
+            width: 100%;
+          }
 
-					#death-count {
-						width: 100%;
-					}
+          #death-count {
+            width: 100%;
+          }
 
-					#donation-list,
-					#donation-goals,
-					#donation-polls {
-						margin-top: 20px;
-					}
+          #donation-list,
+          #donation-goals,
+          #donation-polls {
+            margin-top: 20px;
+          }
 
-					trm-attendee-donations {
-						display: flex;
-						position: absolute;
-						top: 0;
-					}
-				</style>
+          trm-attendee-donations {
+            display: flex;
+            position: absolute;
+            top: 0;
+          }
+        </style>
 
-				<div id="top-bar">
-					<div id="timer">
-						<trm-attendee-timer></trm-attendee-timer>
-					</div>
+        <div id="top-bar">
+          <div id="timer">
+            <trm-attendee-timer></trm-attendee-timer>
+          </div>
 
-					<div id="datetime">
-						<trm-attendee-datetime></trm-attendee-datetime>
-					</div>
-				</div>
+          <div id="datetime">
+            <trm-attendee-datetime></trm-attendee-datetime>
+          </div>
+        </div>
 
-				<div id="left-col">
-					<div id="donation-total">
-						<trm-attendee-total></trm-attendee-total>
-					</div>
+        <div id="left-col">
+          <div id="donation-total">
+            <trm-attendee-total></trm-attendee-total>
+          </div>
 
-					<div id="donation-list">
-						<trm-attendee-donation-list></trm-attendee-donation-list>
-					</div>
-				</div>
+          <div id="donation-list">
+            <trm-attendee-donation-list></trm-attendee-donation-list>
+          </div>
+        </div>
 
-				<div id="right-col">
-					<div id="donation-goals">
-						<trm-attendee-donation-goals></trm-attendee-donation-goals>
-					</div>
+        <div id="right-col">
+          <div id="donation-goals">
+            <trm-attendee-donation-goals></trm-attendee-donation-goals>
+          </div>
 
-					<div id="donation-polls">
-						<trm-attendee-donation-polls></trm-attendee-donation-polls>
-					</div>
-				</div>
+          <div id="donation-polls">
+            <trm-attendee-donation-polls></trm-attendee-donation-polls>
+          </div>
+        </div>
 
-				<trm-attendee-donations></trm-attendee-donations>
-			</template>
+        <trm-attendee-donations></trm-attendee-donations>
+      </template>
 
-			<script type="module">
-				import { PolymerElement } from "../node_modules/@polymer/polymer/polymer-element.js";
+      <script type="module">
+        import { PolymerElement } from "../node_modules/@polymer/polymer/polymer-element.js";
 
-				class AttendeeScreen extends PolymerElement {
-					static get is() {
-						return "layout-app";
-					}
-				}
+        class AttendeeScreen extends PolymerElement {
+          static get is() {
+            return "layout-app";
+          }
+        }
 
-				customElements.define(AttendeeScreen.is, AttendeeScreen);
-			</script>
-		</dom-module>
+        customElements.define(AttendeeScreen.is, AttendeeScreen);
+      </script>
+    </dom-module>
 
-		<script type="module">
-			import "../shared/imports/required.js";
-			import "./elements/children/trm-attendee/trm-attendee-timer.js";
-			import "./elements/children/trm-attendee/trm-attendee-datetime.js";
-			import "./elements/children/trm-attendee/trm-attendee-total.js";
-			import "./elements/children/trm-attendee/trm-attendee-donations.js";
-			import "./elements/children/trm-attendee/trm-attendee-donation-list.js";
-			import "./elements/children/trm-attendee/trm-attendee-donation-goals.js";
-			import "./elements/children/trm-attendee/trm-attendee-donation-polls.js";
-			import "./elements/children/trm-attendee/trm-attendee-donation-goal-achieved.js";
+    <script type="module">
+      import "../shared/imports/required.js";
+      import "./elements/children/trm-attendee/trm-attendee-timer.js";
+      import "./elements/children/trm-attendee/trm-attendee-datetime.js";
+      import "./elements/children/trm-attendee/trm-attendee-total.js";
+      import "./elements/children/trm-attendee/trm-attendee-donations.js";
+      import "./elements/children/trm-attendee/trm-attendee-donation-list.js";
+      import "./elements/children/trm-attendee/trm-attendee-donation-goals.js";
+      import "./elements/children/trm-attendee/trm-attendee-donation-polls.js";
+      import "./elements/children/trm-attendee/trm-attendee-donation-goal-achieved.js";
 
-			window.addEventListener("DOMContentLoaded", () => {
-				TweenLite.to(document.body, 0.333, {
-					opacity: 1,
-					ease: Power1.easeOut,
-				});
-			});
-		</script>
-	</body>
+      window.addEventListener("DOMContentLoaded", () => {
+        TweenLite.to(document.body, 0.333, {
+          opacity: 1,
+          ease: Power1.easeOut,
+        });
+      });
+    </script>
+  </body>
 </html>

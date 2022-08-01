@@ -1,4 +1,4 @@
-@import "../../shared/fonts/exo2/exo2.css";
+@import "../../shared/fonts/overpass/overpass.css";
 
 :root {
   --marathon-col: #ffa301;
@@ -15,12 +15,11 @@
 }
 
 body {
-  font-family: "Exo 2";
+  font-family: var(--overpass-font);
   margin: 0;
   opacity: 0;
 }
 
 #container {
   position: absolute;
-  overflow: hidden;
 }

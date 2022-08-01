@@ -19,7 +19,6 @@ class TRMRunInfo extends PolymerElement {
   static get template() {
     return html`
       <link rel="stylesheet" href="../shared/fonts/fontawesome/font-awesome.min.css" />
-      <link rel="stylesheet" href="../shared/fonts/exo2/exo2.css" />
 
       <style>
         * {

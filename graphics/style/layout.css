@@ -1,7 +1,11 @@
 @import "base.css";
 
 #container {
-    height: 100vh;
-    position: relative;
-    width: 100vw;
+  background: transparent;
+  left: 0;
+  height: 1080px;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 1920px;
 }

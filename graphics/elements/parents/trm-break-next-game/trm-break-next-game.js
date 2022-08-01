@@ -17,8 +17,6 @@ const runnerTimer = nodecg.Replicant("runnerTimer");
 class TRMBreakNextGame extends PolymerElement {
   static get template() {
     return html`
-      <link rel="stylesheet" href="../shared/fonts/exo2/exo2.css" />
-
       <style>
         * {
           box-sizing: border-box;
