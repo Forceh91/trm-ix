@@ -126,6 +126,13 @@ class TRMRunInfo extends PolymerElement {
           <div class="run-info-text" id="runner"></div>
         </div>
 
+        <div class="run-container run-info-block">
+          <div class="run-info-type"><i class="fas fa-microphone"></i></div>
+          <div class="run-info-text hosts">
+            <trm-host-info></trm-host-info>
+          </div>
+        </div>
+
         <div class="run_container run-info-block">
           <div class="run-info-type"><i class="fas fa-stopwatch"></i></div>
           <div class="run-info-text timer">
@@ -134,13 +141,6 @@ class TRMRunInfo extends PolymerElement {
               <div class="run-info-type"><i class="fas fa-flag-checkered"></i></div>
               <div id="estimate"></div>
             </div>
-          </div>
-        </div>
-
-        <div class="run-container run-info-block">
-          <div class="run-info-type"><i class="fas fa-microphone"></i></div>
-          <div class="run-info-text hosts">
-            <trm-host-info></trm-host-info>
           </div>
         </div>
       </div>
